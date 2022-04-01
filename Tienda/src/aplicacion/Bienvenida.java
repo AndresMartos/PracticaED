@@ -7,6 +7,8 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Bienvenida extends JPanel {
 
@@ -23,9 +25,20 @@ public class Bienvenida extends JPanel {
 		lblNewLabel.setBounds(124, 62, 188, 64);
 		add(lblNewLabel);
 		
-		JButton btnNewButton = new JButton("Iniciar Sesi\u00F3n");
-		btnNewButton.setBounds(155, 136, 124, 26);
-		add(btnNewButton);
+		JButton btnRegistrarse = new JButton("Registrarte");
+		btnRegistrarse.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Registrarse r = new Registrarse();
+				Ventana v = new Ventana();
+				v.nuevoPanel(r);
+			}
+		});
+		btnRegistrarse.setBounds(155, 136, 124, 26);
+		add(btnRegistrarse);
+		
+		JButton btnIniciar = new JButton("Iniciar Sesi\u00F3n");
+		btnIniciar.setBounds(155, 172, 124, 26);
+		add(btnIniciar);
 
 	}
 }
