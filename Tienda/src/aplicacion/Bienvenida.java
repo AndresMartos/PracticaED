@@ -26,13 +26,6 @@ public class Bienvenida extends JPanel {
 		add(lblNewLabel);
 		
 		JButton btnRegistrarse = new JButton("Registrarte");
-		btnRegistrarse.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Registrarse r = new Registrarse();
-				Ventana v = new Ventana();
-				v.nuevoPanel(r);
-			}
-		});
 		btnRegistrarse.setBounds(155, 136, 124, 26);
 		add(btnRegistrarse);
 		
