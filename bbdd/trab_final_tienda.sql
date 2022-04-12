@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-04-2022 a las 20:39:29
+-- Tiempo de generación: 12-04-2022 a las 11:00:22
 -- Versión del servidor: 10.4.22-MariaDB
--- Versión de PHP: 8.0.13
+-- Versión de PHP: 7.4.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,8 +18,10 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `tiendaed`
+-- Base de datos: `trab_final_tienda`
 --
+CREATE DATABASE IF NOT EXISTS `trab_final_tienda` DEFAULT CHARACTER SET utf8 COLLATE utf8_spanish_ci;
+USE `trab_final_tienda`;
 
 -- --------------------------------------------------------
 
@@ -27,7 +29,7 @@ SET time_zone = "+00:00";
 -- Estructura de tabla para la tabla `productos`
 --
 
-CREATE TABLE `productos` (
+CREATE TABLE IF NOT EXISTS `productos` (
   `nombre` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
   `cantidad` int(5) NOT NULL,
   `precio` int(5) NOT NULL
@@ -58,6 +60,25 @@ INSERT INTO `productos` (`nombre`, `cantidad`, `precio`) VALUES
 ('Sustrato comum 3,5L', 300, 10),
 ('Sustrato de coco 1,5L', 140, 2),
 ('Sustrato Dionaea 5,5L', 300, 25);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuarios`
+--
+
+CREATE TABLE IF NOT EXISTS `usuarios` (
+  `nameuser` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
+  `password` varchar(200) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `usuarios`
+--
+
+INSERT INTO `usuarios` (`nameuser`, `password`) VALUES
+('lolaindigo', 'latienesdura@#'),
+('pepe_quintana99', 'rutadelbakalaonadamas@');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
