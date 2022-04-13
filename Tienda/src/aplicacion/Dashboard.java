@@ -11,15 +11,20 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
+import java.awt.Cursor;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.CardLayout;
+import java.awt.Toolkit;
 
 public class Dashboard extends JFrame {
 
 	private JPanel contentPane;
+	private JPanel pnlCambia;
 
 	/**
 	 * Launch the application.
@@ -40,26 +45,29 @@ public class Dashboard extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Dashboard() {	
+	public Dashboard() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Dashboard.class.getResource("/Images/bonsai.png")));	
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 500);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setBackground(new Color(154,85,204));
+		contentPane.setBackground(new Color(47, 8, 85));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JPanel pnCerrarSesion = new JPanel();
+		pnCerrarSesion.setBorder(null);
 		pnCerrarSesion.setLayout(null);
 		pnCerrarSesion.setBackground(new Color(47, 8, 85));
-		pnCerrarSesion.setBounds(21, 407, 103, 33);
+		pnCerrarSesion.setBounds(0, 398, 159, 65);
 		contentPane.add(pnCerrarSesion);
+		pnCerrarSesion.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		
 		JLabel lblCerrarSesion = new JLabel("Cerrar Sesi\u00F3n");
-		lblCerrarSesion.setBounds(0, 0, 103, 33);
+		lblCerrarSesion.setBounds(0, 0, 159, 65);
 		pnCerrarSesion.add(lblCerrarSesion);
-		lblCerrarSesion.addMouseListener(new MouseAdapter() {
+		pnCerrarSesion.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				pnCerrarSesion.setBackground(new Color(180,30,255));
@@ -70,27 +78,62 @@ public class Dashboard extends JFrame {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				setVisible(false);
 			}
 		});
 		lblCerrarSesion.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCerrarSesion.setForeground(Color.WHITE);
 		lblCerrarSesion.setFont(new Font("Microsoft PhagsPa", Font.BOLD, 14));
 		
-		JSeparator separator2 = new JSeparator();
-		separator2.setOrientation(SwingConstants.VERTICAL);
-		separator2.setForeground(Color.BLACK);
-		separator2.setBackground(Color.BLACK);
-		separator2.setBounds(148, 0, 2, 471);
-		contentPane.add(separator2);
-		
 		JPanel pnComprar = new JPanel();
+		pnComprar.setBorder(null);
 		pnComprar.setLayout(null);
 		pnComprar.setBackground(new Color(47, 8, 85));
-		pnComprar.setBounds(10, 270, 103, 33);
+		pnComprar.setBounds(0, 63, 159, 54);
 		contentPane.add(pnComprar);
+		pnComprar.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		
 		JLabel lblComprar = new JLabel("Comprar");
-		lblComprar.addMouseListener(new MouseAdapter() {
+		
+		lblComprar.setBounds(0, 0, 159, 54);
+		lblComprar.setHorizontalAlignment(SwingConstants.CENTER);
+		lblComprar.setForeground(Color.WHITE);
+		lblComprar.setFont(new Font("Microsoft PhagsPa", Font.BOLD, 14));
+		pnComprar.add(lblComprar);
+		
+		JPanel pnVender = new JPanel();
+		pnVender.setBorder(null);
+		pnVender.setLayout(null);
+		pnVender.setBackground(new Color(47, 8, 85));
+		pnVender.setBounds(0, 116, 159, 54);
+		contentPane.add(pnVender);
+		pnVender.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		
+		JLabel lblVender = new JLabel("Vender");
+		
+		lblVender.setBounds(0, 0, 159, 54);
+		lblVender.setHorizontalAlignment(SwingConstants.CENTER);
+		lblVender.setForeground(Color.WHITE);
+		lblVender.setFont(new Font("Microsoft PhagsPa", Font.BOLD, 14));
+		pnVender.add(lblVender);
+		
+		pnlCambia = new JPanel();
+		pnlCambia.setBounds(159, 0, 635, 471);
+		contentPane.add(pnlCambia);
+		pnlCambia.setLayout(new CardLayout(0, 0));
+		pnlCambia.setBackground(new Color(154,85,204));
+		
+		HolaUsuario hola = new HolaUsuario();
+		pnlCambia.add(hola);
+		
+		JLabel lblNewLabel = new JLabel("Usuario");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setFont(new Font("Microsoft PhagsPa", Font.BOLD, 14));
+		lblNewLabel.setForeground(Color.WHITE);
+		lblNewLabel.setBounds(0, 0, 159, 65);
+		contentPane.add(lblNewLabel);
+		
+		pnComprar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				pnComprar.setBackground(new Color(180,30,255));
@@ -101,22 +144,13 @@ public class Dashboard extends JFrame {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				Compra comprar = new Compra();
+				
+				cambiar(comprar);
 			}
 		});
-		lblComprar.setBounds(0, 0, 103, 33);
-		lblComprar.setHorizontalAlignment(SwingConstants.CENTER);
-		lblComprar.setForeground(Color.WHITE);
-		lblComprar.setFont(new Font("Microsoft PhagsPa", Font.BOLD, 14));
-		pnComprar.add(lblComprar);
 		
-		JPanel pnVender = new JPanel();
-		pnVender.setLayout(null);
-		pnVender.setBackground(new Color(47, 8, 85));
-		pnVender.setBounds(10, 160, 103, 33);
-		contentPane.add(pnVender);
-		
-		JLabel lblVender = new JLabel("Vender");
-		lblVender.addMouseListener(new MouseAdapter() {
+		pnVender.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				pnVender.setBackground(new Color(180,30,255));
@@ -127,33 +161,18 @@ public class Dashboard extends JFrame {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				Vender vender = new Vender();
+				
+				cambiar(vender);
 			}
 		});
-		lblVender.setBounds(0, 0, 103, 33);
-		lblVender.setHorizontalAlignment(SwingConstants.CENTER);
-		lblVender.setForeground(Color.WHITE);
-		lblVender.setFont(new Font("Microsoft PhagsPa", Font.BOLD, 14));
-		pnVender.add(lblVender);
 		
-		JSeparator separator2_2 = new JSeparator();
-		separator2_2.setForeground(Color.BLACK);
-		separator2_2.setBackground(Color.BLACK);
-		separator2_2.setBounds(0, 394, 150, 2);
-		contentPane.add(separator2_2);	
-		
-		JPanel content = new JPanel();
-		content.setBounds(160, 0, 634, 471);
-		content.setBackground(new Color(154,85,204));
-		contentPane.add(content);
-		
-		Vender v = new Vender();
-		v.setSize(646,471);
-		v.setLocation(160,0);
-		
-		content.removeAll();
-		content.add(v, BorderLayout.CENTER);
-		content.revalidate();
-		content.repaint();
-		
+	}
+	
+	public void cambiar(JPanel p) {
+		pnlCambia.removeAll();
+		pnlCambia.add(p);
+		pnlCambia.revalidate();
+		pnlCambia.repaint();
 	}
 }
