@@ -52,6 +52,7 @@ public class Ventana extends JFrame {
 	 * Create the frame.
 	 */
 	public Ventana() {
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 500);
 		setIconImage(new ImageIcon(getClass().getResource("/Images/bonsai.png")).getImage());
@@ -132,6 +133,16 @@ public class Ventana extends JFrame {
 		pnlIniciar.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		
 		JLabel lblIniciar = new JLabel("Iniciar Sesi\u00F3n");
+		lblIniciar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				pnlIniciar.setBackground(new Color(180,30,255));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				pnlIniciar.setBackground(new Color(47,8,85));
+			}
+		});
 		lblIniciar.setHorizontalAlignment(SwingConstants.CENTER);
 		lblIniciar.setFont(new Font("Microsoft PhagsPa", Font.BOLD, 14));
 		lblIniciar.setForeground(Color.WHITE);
@@ -151,6 +162,16 @@ public class Ventana extends JFrame {
 		pnlRegistrar.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		
 		JLabel lblRegistrar = new JLabel("Registrarse");
+		lblRegistrar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseExited(MouseEvent e) {
+				pnlRegistrar.setBackground(new Color(47,8,85));
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				pnlRegistrar.setBackground(new Color(180,30,255));
+			}
+		});
 		lblRegistrar.setHorizontalAlignment(SwingConstants.CENTER);
 		lblRegistrar.setForeground(Color.WHITE);
 		lblRegistrar.setFont(new Font("Microsoft PhagsPa", Font.BOLD, 14));
