@@ -142,6 +142,12 @@ public class Ventana extends JFrame {
 			public void mouseExited(MouseEvent e) {
 				pnlIniciar.setBackground(new Color(47,8,85));
 			}
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Dashboard d=new Dashboard();
+				d.setVisible(true);
+				setVisible(false); 
+			}
 		});
 		lblIniciar.setHorizontalAlignment(SwingConstants.CENTER);
 		lblIniciar.setFont(new Font("Microsoft PhagsPa", Font.BOLD, 14));
@@ -170,6 +176,12 @@ public class Ventana extends JFrame {
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				pnlRegistrar.setBackground(new Color(180,30,255));
+			}
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Dashboard d=new Dashboard();
+				d.setVisible(true);
+				setVisible(false); 
 			}
 		});
 		lblRegistrar.setHorizontalAlignment(SwingConstants.CENTER);

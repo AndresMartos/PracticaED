@@ -78,7 +78,9 @@ public class Dashboard extends JFrame {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				setVisible(false);
+				Ventana v=new Ventana();
+				v.setVisible(true);
+				setVisible(false); 
 			}
 		});
 		lblCerrarSesion.setHorizontalAlignment(SwingConstants.CENTER);
