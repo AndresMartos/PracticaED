@@ -29,7 +29,7 @@ public class Dashboard extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public void cargarVentana(Dashboard frame) {
+	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {

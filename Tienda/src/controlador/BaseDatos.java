@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 import modelo.Articulos;
 import modelo.Usuario;
+import vista.Vender;
 
 public class BaseDatos {
 	public void nuevoCliente() {
@@ -54,54 +55,29 @@ public class BaseDatos {
 		}
 	}
 	
-	public void nuevoArticulo() {
+	public void nuevoArticulo(Vender vende) {
 		
-		/**
-		 * 
-		 * Metodo para insertar datos de Articulos
-		 * 
-		 */
+		System.out.println(nombre);
+		System.out.println(cantidad);
+		System.out.println(precio);
 		
-		Articulos art = new Articulos();
-		Scanner sc = new Scanner(System.in);
-		
-		System.out.print("Inserte nombre del articulo: ");
-		art.setNombreArticulo(sc.nextLine());
-		
-		System.out.print("Inserte la descripcion del mismo: ");
-		art.setDescripcion(sc.nextLine());
-		
-		System.out.print("Inserte el precio del articulo: ");
-		art.setPrecio(sc.nextInt());
-		
-		/**
-		 * 
-		 * Esta opcion, de la cantidad de articulos
-		 * CHECKEAR MAS VER OPCIONES PARA ESTA FUNCION!!
-		 * no se si lo añadiria el vendedor, como... cantidad disponibles
-		 * O el usuario(cliente) que dice cuantos quiere comprar
-		 * HABLAR Y CAMBIAR
-		 * 
-		 */
-		System.out.print("Inserte la cantidad de articulos a vender: ");
-		art.setCantidadCompra(sc.nextInt());
-		
-		try {
+
+		try {											// Java Data Base Connection
+			Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost/trab_final_tienda","root","");
 			
-			Connection conex = DriverManager.getConnection("jdbc:mysql://localhost/prueba_ed_proy", "root", "");
+			Statement consulta = conexion.createStatement();
+			consulta.executeUpdate("INSERT INTO `productos` (`nombre`, `cantidad`, `precio`) VALUES"
+					+ "("+ "'" + nombre + "'," + "'" + cantidad + "'," + precio + ")");
 			
-			Statement consulta = conex.createStatement();
-			
-			consulta.executeUpdate("INSERT INTO articulos(nombreArt, descripcion, cantidadAComprar, precioArticulo)" 
-			+ "VALUES (" + "'" + art.getNombreArticulo() + "', '" + art.getDescripcion() + "', '" + art.getCantidadCompra() + "', '" + art.getPrecio() + "');");
-			
-			conex.close();
-			System.out.println(" ARTICULO INSERTADOS CORRECTAMENTE");
-			
-		} catch (SQLException a ) {
-			
-			a.printStackTrace();
-			
+			conexion.close();
+			System.out.println("Articulo guardado correctamente");
+		} catch (SQLException e1){
+			e1.printStackTrace();
 		}
+
+		
+		txtProducto.setText("");
+		txtCantidad.setText("");
+		txtPrecio.setText("");
 	}
 }

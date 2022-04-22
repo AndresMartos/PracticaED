@@ -12,6 +12,9 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
 import javax.swing.SwingConstants;
+
+import modelo.Articulos;
+
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
@@ -76,32 +79,7 @@ public class Vender extends JPanel {
 		lblVender.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				String nombre = txtProducto.getText();
-				String cantidad = txtCantidad.getText().toString();
-				String precio = txtPrecio.getText().toString();
 				
-				System.out.println(nombre);
-				System.out.println(cantidad);
-				System.out.println(precio);
-				
-
-				try {											// Java Data Base Connection
-					Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost/trab_final_tienda","root","");
-					
-					Statement consulta = conexion.createStatement();
-					consulta.executeUpdate("INSERT INTO `productos` (`nombre`, `cantidad`, `precio`) VALUES"
-							+ "("+ "'" + nombre + "'," + "'" + cantidad + "'," + precio + ")");
-					
-					conexion.close();
-					System.out.println("Articulo guardado correctamente");
-				} catch (SQLException e1){
-					e1.printStackTrace();
-				}
-
-				
-				txtProducto.setText("");
-				txtCantidad.setText("");
-				txtPrecio.setText("");
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
