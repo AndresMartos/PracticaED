@@ -1,4 +1,4 @@
-package aplicacion;
+package vista;
 
 import javax.swing.JPanel;
 import javax.swing.JTable;

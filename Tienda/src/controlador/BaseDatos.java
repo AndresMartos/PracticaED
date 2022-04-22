@@ -1,4 +1,4 @@
-package vista;
+package controlador;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

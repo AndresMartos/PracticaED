@@ -1,4 +1,4 @@
-package aplicacion;
+package vista;
 
 import java.awt.Color;
 

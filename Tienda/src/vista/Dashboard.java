@@ -1,4 +1,4 @@
-package aplicacion;
+package vista;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -29,7 +29,7 @@ public class Dashboard extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public void cargarVentana(Dashboard frame) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
