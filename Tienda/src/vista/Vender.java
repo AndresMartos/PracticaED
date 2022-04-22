@@ -72,8 +72,8 @@ public class Vender extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				Articulos articuloActual = new Articulos();
 				String nombre = txtProducto.getText();
-				String cantidad = txtCantidad.getText();
-				String precio = txtPrecio.getText();
+				int cantidad = Integer.parseInt(txtCantidad.getText());
+				int precio = Integer.parseInt(txtPrecio.getText());
 				
 				articuloActual.setNombreArticulo(nombre);
 				articuloActual.setCantidadCompra(cantidad);

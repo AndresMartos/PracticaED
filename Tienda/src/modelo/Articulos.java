@@ -2,15 +2,20 @@ package modelo;
 
 public class Articulos {
 	String nombreArticulo;
-	String descripcion;
 	int cantidadCompra;
 	int precio;
 	
 	public Articulos() {
 		nombreArticulo = null;
-		descripcion = "Sin descripcion";
 		cantidadCompra = 0;
 		precio = 0;
+	}
+	
+	public Articulos(String nombreArticulo, int cantidadCompra, int precio) {
+		super();
+		this.nombreArticulo = nombreArticulo;
+		this.cantidadCompra = cantidadCompra;
+		this.precio = precio;
 	}
 
 	public String getNombreArticulo() {
@@ -19,14 +24,6 @@ public class Articulos {
 
 	public void setNombreArticulo(String nombreArticulo) {
 		this.nombreArticulo = nombreArticulo;
-	}
-
-	public String getDescripcion() {
-		return descripcion;
-	}
-
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
 	}
 
 	public int getCantidadCompra() {

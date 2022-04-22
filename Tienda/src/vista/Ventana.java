@@ -144,9 +144,14 @@ public class Ventana extends JFrame {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Dashboard d=new Dashboard();
-				d.setVisible(true);
-				setVisible(false); 
+				//boolean existe = iniciarSesion(usuario);
+				//if(existe) {
+					Dashboard d=new Dashboard();
+					d.setVisible(true);
+					setVisible(false); 
+				//}else {
+					
+				//}
 			}
 		});
 		lblIniciar.setHorizontalAlignment(SwingConstants.CENTER);

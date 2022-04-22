@@ -55,29 +55,23 @@ public class BaseDatos {
 		}
 	}
 	
-	public void nuevoArticulo(Vender vende) {
-		
-		System.out.println(nombre);
-		System.out.println(cantidad);
-		System.out.println(precio);
-		
 
+	public void VenderArticulo(Articulos articuloActual) {
+		// TODO Auto-generated method stub
+
+		
 		try {											// Java Data Base Connection
 			Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost/trab_final_tienda","root","");
 			
 			Statement consulta = conexion.createStatement();
 			consulta.executeUpdate("INSERT INTO `productos` (`nombre`, `cantidad`, `precio`) VALUES"
-					+ "("+ "'" + nombre + "'," + "'" + cantidad + "'," + precio + ")");
+					+ "("+ "'" + articuloActual.getNombreArticulo() + "'," + "'" 
+					+ articuloActual.getCantidadCompra() + "'," + articuloActual.getPrecio() + ")");
 			
 			conexion.close();
 			System.out.println("Articulo guardado correctamente");
 		} catch (SQLException e1){
 			e1.printStackTrace();
 		}
-
-		
-		txtProducto.setText("");
-		txtCantidad.setText("");
-		txtPrecio.setText("");
 	}
 }
