@@ -139,14 +139,19 @@ public class Ventana extends JFrame {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				//boolean existe = iniciarSesion(usuario);
-				//if(existe) {
+				Usuario usuario = new Usuario();
+				usuario.setNombre(txtUser.getText());
+				usuario.setContrasenia(txtPassword.getPassword());
+				
+				boolean existe = bd.iniciarSesion(usuario);
+				
+				if(existe) {
 					Dashboard d=new Dashboard();
 					d.setVisible(true);
-					setVisible(false); 
-				//}else {
-					
-				//}
+					setVisible(false);
+				}else {
+					JOptionPane.showMessageDialog(null,"No existe un usuario con esa contraseña en la base de datos.");
+				}
 			}
 		});
 		lblIniciar.setHorizontalAlignment(SwingConstants.CENTER);
@@ -180,17 +185,20 @@ public class Ventana extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				Usuario usuario = new Usuario();
-				usuario.setNombre(txtUser.getText());
+				usuario.setNombre(txtUser.getName());
 				usuario.setContrasenia(txtPassword.getPassword());
+				boolean existe = bd.registrar(usuario);
 				
-				boolean existe = bd.iniciarSesion(usuario);
-				
-				if(existe) {
-					Dashboard d=new Dashboard();
-					d.setVisible(true);
+				if(existe) { 
+					
+					JOptionPane.showMessageDialog(null, "EL USUARIO ESTA REGISTRADO EN ESTA APP");
+					
+				} else {
+					
+					Dashboard dash = new Dashboard();
+					dash.setVisible(true);
 					setVisible(false);
-				}else {
-					JOptionPane.showMessageDialog(null,"No existe un usuario con esa contraseña en la base de datos.");
+					
 				}
 			}
 		});
