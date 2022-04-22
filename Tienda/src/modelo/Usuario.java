@@ -1,28 +1,28 @@
 package modelo;
 
 public class Usuario {
-	String nombre_usuario;
-	String password_usuario;
+	String nombre;
+	String contrasenia;
 	
 	public Usuario() {
-		nombre_usuario = "default00";
-		password_usuario = null;
+		nombre = "default00";
+		contrasenia = null;
 	}
 
-	public String getNombre_usuario() {
-		return nombre_usuario;
+	public String getNombre() {
+		return nombre;
 	}
 
-	public void setNombre_usuario(String nombre_usuario) {
-		this.nombre_usuario = nombre_usuario;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 
-	public String getPassword_usuario() {
-		return password_usuario;
+	public String getContrasenia() {
+		return contrasenia;
 	}
 
-	public void setPassword_usuario(String password_usuario) {
-		this.password_usuario = password_usuario;
+	public void setContrasenia(String contrasenia) {
+		this.contrasenia = contrasenia;
 	}
 	
 	

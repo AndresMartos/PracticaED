@@ -2,6 +2,7 @@ package controlador;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Scanner;
@@ -73,5 +74,25 @@ public class BaseDatos {
 		} catch (SQLException e1){
 			e1.printStackTrace();
 		}
+	}
+	
+	public boolean iniciarSesion(Usuario usuario) {
+		boolean existe = false;
+		try {
+			Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost/db_articulos", "root", "");
+			Statement consulta = conexion.createStatement(); 
+			ResultSet registro = consulta.executeQuery("select nameuser, password from usuarios");
+			while(registro.next()&&!existe) {
+				if(usuario.getNombre() == registro.getString("nameuser") && usuario.getContrasenia() == registro.getString("password")) {
+					existe = true;
+				}else {
+					existe = false;
+				}
+			}
+			conexion.close();
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return existe;
 	}
 }
