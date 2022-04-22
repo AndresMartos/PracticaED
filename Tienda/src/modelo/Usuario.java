@@ -2,7 +2,7 @@ package modelo;
 
 public class Usuario {
 	String nombre;
-	String contrasenia;
+	char[] contrasenia;
 	
 	public Usuario() {
 		nombre = "default00";
@@ -17,11 +17,11 @@ public class Usuario {
 		this.nombre = nombre;
 	}
 
-	public String getContrasenia() {
+	public char[] getContrasenia() {
 		return contrasenia;
 	}
 
-	public void setContrasenia(String contrasenia) {
+	public void setContrasenia(char[] contrasenia) {
 		this.contrasenia = contrasenia;
 	}
 	

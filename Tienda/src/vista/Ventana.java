@@ -1,37 +1,32 @@
 package vista;
 
-import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
-import java.awt.Color;
-import java.awt.Cursor;
-import java.awt.Font;
-import javax.swing.SwingConstants;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.CardLayout;
-import javax.swing.UIManager;
-import javax.swing.JTextField;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JPasswordField;
-import javax.swing.JTextArea;
-import javax.swing.JCheckBox;
-import javax.swing.JTable;
 import javax.swing.JSeparator;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import javax.swing.DropMode;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.UIManager;
+
+import controlador.BaseDatos;
+import modelo.Usuario;
 
 public class Ventana extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtUser;
 	private JPasswordField txtPassword;
+	private BaseDatos bd = new BaseDatos();
 	/**
 	 * Launch the application.
 	 */
@@ -184,9 +179,19 @@ public class Ventana extends JFrame {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Dashboard d=new Dashboard();
-				d.setVisible(true);
-				setVisible(false); 
+				Usuario usuario = new Usuario();
+				usuario.setNombre(txtUser.getText());
+				usuario.setContrasenia(txtPassword.getPassword());
+				
+				boolean existe = bd.iniciarSesion(usuario);
+				
+				if(existe) {
+					Dashboard d=new Dashboard();
+					d.setVisible(true);
+					setVisible(false);
+				}else {
+					JOptionPane.showMessageDialog(null,"No existe un usuario con esa contraseña en la base de datos.");
+				}
 			}
 		});
 		lblRegistrar.setHorizontalAlignment(SwingConstants.CENTER);
