@@ -7,6 +7,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -70,25 +71,32 @@ public class Vender extends JPanel {
 		lblVender.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Articulos articuloActual = new Articulos();
-				String nombre = txtProducto.getText();
-				int cantidad = Integer.parseInt(txtCantidad.getText());
-				int precio = Integer.parseInt(txtPrecio.getText());
 				
-				articuloActual.setNombreArticulo(nombre);
-				articuloActual.setCantidadCompra(cantidad);
-				articuloActual.setPrecio(precio);
+				if(txtProducto.getText().equals("") || txtCantidad.getText().equals("") || txtPrecio.getText().equals("")) {
+					JOptionPane.showMessageDialog(null, "Introduzca todos los datos!");
+				}else {
+					Articulos articuloActual = new Articulos();
+					String nombre = txtProducto.getText();
+					int cantidad = Integer.parseInt(txtCantidad.getText());
+					int precio = Integer.parseInt(txtPrecio.getText());
+					
+					articuloActual.setNombreArticulo(nombre);
+					articuloActual.setCantidadCompra(cantidad);
+					articuloActual.setPrecio(precio);
+					
+					bd.VenderArticulo(articuloActual);
+					
+					System.out.println(nombre);
+					System.out.println(cantidad);
+					System.out.println(precio);
+					
+					
+					txtProducto.setText("");
+					txtCantidad.setText("");
+					txtPrecio.setText("");
+				}
 				
-				bd.VenderArticulo(articuloActual);
 				
-				System.out.println(nombre);
-				System.out.println(cantidad);
-				System.out.println(precio);
-				
-				
-				txtProducto.setText("");
-				txtCantidad.setText("");
-				txtPrecio.setText("");
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
