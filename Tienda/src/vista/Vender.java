@@ -1,33 +1,24 @@
 package vista;
 
-import javax.swing.JPanel;
-import javax.swing.JButton;
-import javax.swing.JTextField;
-import javax.swing.JTable;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
-import javax.swing.SwingConstants;
-
-import modelo.Articulos;
-
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+
+import controlador.BaseDatos;
+import modelo.Articulos;
 
 public class Vender extends JPanel {
 	private JTextField txtProducto;
 	private JTextField txtCantidad;
 	private JTextField txtPrecio;
+	private BaseDatos bd = new BaseDatos();
 
 	/**
 	 * Create the panel.
@@ -79,7 +70,25 @@ public class Vender extends JPanel {
 		lblVender.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				Articulos articuloActual = new Articulos();
+				String nombre = txtProducto.getText();
+				String cantidad = txtCantidad.getText();
+				String precio = txtPrecio.getText();
 				
+				articuloActual.setNombreArticulo(nombre);
+				articuloActual.setCantidadCompra(cantidad);
+				articuloActual.setPrecio(precio);
+				
+				bd.VenderArticulo(articuloActual);
+				
+				System.out.println(nombre);
+				System.out.println(cantidad);
+				System.out.println(precio);
+				
+				
+				txtProducto.setText("");
+				txtCantidad.setText("");
+				txtPrecio.setText("");
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
