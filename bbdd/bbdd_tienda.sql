@@ -40,26 +40,26 @@ CREATE TABLE IF NOT EXISTS `productos` (
 --
 
 INSERT INTO `productos` (`nombre`, `cantidad`, `precio`) VALUES
-('Ajo', 45, 8),
-('Cebolla', 98, 7),
-('Dionaea', 99, 5),
-('Guantes de tela', 123, 13),
-('Margarita', 56, 2),
-('Nepenthes', 86, 15),
-('Poto', 20, 5),
-('Regadera 2L', 100, 5),
-('Regadera 6L', 100, 10),
-('Regadera 8L', 100, 20),
-('Rosa', 10, 10),
-('Semillas de Calabacin', 200, 10),
-('Semillas de Fresa', 200, 10),
-('Semillas de Pepino', 200, 10),
-('Semillas de Tomate', 98, 10),
-('Semillas de Zanahoria', 200, 10),
-('Semillero natural', 100, 6),
-('Sustrato comum 3,5L', 300, 10),
-('Sustrato de coco 1,5L', 140, 2),
-('Sustrato Dionaea 5,5L', 300, 25);
+('Ajo', 9999, 8),
+('Cebolla', 9999, 7),
+('Dionaea', 9999, 5),
+('Guantes de tela', 9999, 13),
+('Margarita', 9999, 2),
+('Nepenthes', 9999, 15),
+('Poto', 9999, 5),
+('Regadera 2L', 9999, 5),
+('Regadera 6L', 9999, 10),
+('Regadera 8L', 9999, 20),
+('Rosa', 9999, 10),
+('Semillas de Calabacin', 9999, 10),
+('Semillas de Fresa', 9999, 10),
+('Semillas de Pepino', 9999, 10),
+('Semillas de Tomate', 9999, 10),
+('Semillas de Zanahoria', 9999, 10),
+('Semillero natural', 9999, 6),
+('Sustrato comum 3,5L', 9999, 10),
+('Sustrato de coco 1,5L', 9999, 2),
+('Sustrato Dionaea 5,5L', 9999, 25);
 
 -- --------------------------------------------------------
 
