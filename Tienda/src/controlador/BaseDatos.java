@@ -43,6 +43,7 @@ public class BaseDatos {
 		// TODO Auto-generated method stub
 		
 		boolean existe = false;
+		int valor = 1;
 			
 		
 		 
@@ -52,20 +53,22 @@ public class BaseDatos {
 			Statement consulta = conexion.createStatement();
 			ResultSet registro = consulta.executeQuery("select nombre from productos");
 			while(registro.next()&&!existe) {
-				if(articuloActual.getNombreArticulo().toLowerCase() == registro.getString("nombre")) {
+				if(articuloActual.getNombreArticulo().toLowerCase().equals(registro.getString("nombre").toLowerCase())) {
 					existe = true;
-					int valor = consulta.executeUpdate("update productos set cantidad = cantidad+" + articuloActual.getCantidadCompra());
+					
+					valor = update(articuloActual);
 					
 					if (valor==1) {
 						System.out.println("Artículo modificado correctamente");
 					}else {
-						System.out.println("No existe un artículo con dicho identificador");
+						System.out.println("No se ha modificado correctamente");
 					}
 					
-				}else {
-					existe = false;
 				}
 			}
+			conexion.close();
+			conexion = DriverManager.getConnection("jdbc:mysql://localhost/trab_final_tienda","root","");
+			consulta = conexion.createStatement();
 			if(!existe) {
 				consulta.executeUpdate("INSERT INTO `productos` (`nombre`, `cantidad`, `precio`) VALUES"
 							+ "("+ "'" + articuloActual.getNombreArticulo() + "'," + "'" 
@@ -101,5 +104,20 @@ public class BaseDatos {
 			e.printStackTrace();
 		}
 		return existe;
+	}
+	
+	public int update(Articulos articuloActual) {
+		int valor = 1;
+		try {
+			Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost/trab_final_tienda","root","");
+			
+			Statement consulta = conexion.createStatement();
+			valor = consulta.executeUpdate("update productos set cantidad = cantidad+" + articuloActual.getCantidadCompra());
+			conexion.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return  valor;
 	}
 }
