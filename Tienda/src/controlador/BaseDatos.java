@@ -5,13 +5,55 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Vector;
+
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 import modelo.Articulos;
 import modelo.Usuario;
 import vista.Vender;
 
 public class BaseDatos {
+	
+	public void muestraTabla(JTable jtable) {
+		ArrayList<Articulos> arrArticulos = new ArrayList<>();
+		
+		Vector vNombres = new Vector();
+		vNombres.add("Nombre");
+		vNombres.add("Cantidad");
+		vNombres.add("Precio");
+		
+		try {
+			Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost/trab_final_tienda","root","");
+			Statement consulta = conexion.createStatement();
+			ResultSet registro = consulta.executeQuery("SELECT * FROM productos");
+			
+			while(registro.next()) {
+				Articulos articuloActual = new Articulos();
+				
+				articuloActual.setNombreArticulo(registro.getString("nombre"));
+				articuloActual.setCantidadCompra(registro.getInt("cantidad"));
+				articuloActual.setPrecio(registro.getInt("precio"));
+				
+				arrArticulos.add(articuloActual);
+			}
+			conexion.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		jtable.setModel(new DefaultTableModel(vNombres,arrArticulos.size()));
+		
+		for (int i = 0; i < arrArticulos.size(); i++) {
+			jtable.setValueAt(arrArticulos.get(i).getNombreArticulo(), i, 0);
+			jtable.setValueAt(arrArticulos.get(i).getCantidadCompra(), i, 1);
+			jtable.setValueAt(arrArticulos.get(i).getPrecio(), i, 2);
+		}
+	}
+	
 	public boolean registrar(Usuario usuario) {
 		boolean existe = false;
 		try {
