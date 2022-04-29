@@ -18,13 +18,8 @@ import vista.Vender;
 
 public class BaseDatos {
 	
-	public void muestraTabla(JTable jtable) {
+	public ArrayList<Articulos> muestraTabla() {
 		ArrayList<Articulos> arrArticulos = new ArrayList<>();
-		
-		Vector vNombres = new Vector();
-		vNombres.add("Nombre");
-		vNombres.add("Cantidad");
-		vNombres.add("Precio");
 		
 		try {
 			Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost/trab_final_tienda","root","");
@@ -45,13 +40,7 @@ public class BaseDatos {
 			e.printStackTrace();
 		}
 		
-		jtable.setModel(new DefaultTableModel(vNombres,arrArticulos.size()));
-		
-		for (int i = 0; i < arrArticulos.size(); i++) {
-			jtable.setValueAt(arrArticulos.get(i).getNombreArticulo(), i, 0);
-			jtable.setValueAt(arrArticulos.get(i).getCantidadCompra(), i, 1);
-			jtable.setValueAt(arrArticulos.get(i).getPrecio(), i, 2);
-		}
+		return arrArticulos;
 	}
 	
 	public boolean registrar(Usuario usuario) {

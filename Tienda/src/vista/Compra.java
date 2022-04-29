@@ -5,6 +5,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import controlador.BaseDatos;
+import modelo.Articulos;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -18,11 +19,14 @@ import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.Vector;
 
 public class Compra extends JPanel {
 	private JTable jtableTienda;
 	private JTable jtableCesta;
 	private BaseDatos bd = new BaseDatos();
+	private ArrayList<Articulos> arrArticulos = new ArrayList<>();
 
 	/**
 	 * Create the panel.
@@ -80,7 +84,19 @@ public class Compra extends JPanel {
 		jtableCesta = new JTable();
 		scrollpanelCesta.setViewportView(jtableCesta);
 		
-		bd.muestraTabla(jtableTienda);
+		Vector vNombres = new Vector();
+		vNombres.add("Nombre");
+		vNombres.add("Cantidad");
+		vNombres.add("Precio");
+		
+		arrArticulos = bd.muestraTabla();
 
+		jtableTienda.setModel(new DefaultTableModel(vNombres,arrArticulos.size()));
+		
+		for (int i = 0; i < arrArticulos.size(); i++) {
+			jtableTienda.setValueAt(arrArticulos.get(i).getNombreArticulo(), i, 0);
+			jtableTienda.setValueAt(arrArticulos.get(i).getCantidadCompra(), i, 1);
+			jtableTienda.setValueAt(arrArticulos.get(i).getPrecio(), i, 2);
+		}
 	}
 }
