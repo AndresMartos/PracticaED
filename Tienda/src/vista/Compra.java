@@ -3,15 +3,26 @@ package vista;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+import controlador.BaseDatos;
+
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Point;
+
 import javax.swing.JButton;
+import javax.swing.JScrollPane;
+import javax.swing.SwingConstants;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Compra extends JPanel {
-	private JTable table;
-	private JTable table_1;
+	private JTable jtableTienda;
+	private JTable jtableCesta;
+	private BaseDatos bd = new BaseDatos();
 
 	/**
 	 * Create the panel.
@@ -20,20 +31,6 @@ public class Compra extends JPanel {
 		setLayout(null);
 		
 		setBackground(new Color(154,85,204));
-		
-		table = new JTable();
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-			}
-		));
-		table.setBounds(210, 118, 305, 209);
-		add(table);
-		
-		table_1 = new JTable();
-		table_1.setBounds(85, 118, 108, 250);
-		add(table_1);
 		
 		JLabel lblTienda = new JLabel("Tienda");
 		lblTienda.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -45,13 +42,45 @@ public class Compra extends JPanel {
 		lblCesta.setBounds(114, 95, 45, 13);
 		add(lblCesta);
 		
-		JButton btnComprar = new JButton("Comprar");
-		btnComprar.setBounds(430, 347, 85, 21);
-		add(btnComprar);
+		JPanel pnComprar = new JPanel();
+		pnComprar.setLayout(null);
+		pnComprar.setBackground(new Color(47, 8, 85));
+		pnComprar.setBounds(346, 370, 169, 33);
+		add(pnComprar);
 		
-		JButton btnAtras = new JButton("Atr\u00E1s");
-		btnAtras.setBounds(335, 347, 85, 21);
-		add(btnAtras);
+		JLabel lblComprar = new JLabel("Comprar");
+		lblComprar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+			}
+		});
+		lblComprar.setBounds(0, 0, 169, 33);
+		pnComprar.add(lblComprar);
+		lblComprar.setHorizontalAlignment(SwingConstants.CENTER);
+		lblComprar.setForeground(Color.WHITE);
+		lblComprar.setFont(new Font("Microsoft PhagsPa", Font.BOLD, 14));
+		
+		JScrollPane scrollpanelTienda = new JScrollPane();
+		scrollpanelTienda.setBounds(210, 118, 305, 209);
+		add(scrollpanelTienda);
+		
+		jtableTienda = new JTable();
+		jtableTienda.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+			}
+		});
+		scrollpanelTienda.setViewportView(jtableTienda);
+		
+		JScrollPane scrollpanelCesta = new JScrollPane();
+		scrollpanelCesta.setBounds(70, 119, 120, 284);
+		add(scrollpanelCesta);
+		
+		jtableCesta = new JTable();
+		scrollpanelCesta.setViewportView(jtableCesta);
+		
+		bd.muestraTabla(jtableTienda);
 
 	}
 }
