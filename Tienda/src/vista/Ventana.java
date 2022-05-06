@@ -27,6 +27,7 @@ public class Ventana extends JFrame {
 	private JTextField txtUser;
 	private JPasswordField txtPassword;
 	private BaseDatos bd = new BaseDatos();
+	private static String nombre;
 	/**
 	 * Launch the application.
 	 */
@@ -140,10 +141,11 @@ public class Ventana extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				Usuario usuario = new Usuario();
-				usuario.setNombre(txtUser.getText());
+				nombre = txtUser.getText();
+				usuario.setNombre(nombre);
 				usuario.setContrasenia(txtPassword.getText());
 				
-				System.out.println(txtUser.getText() + " " + txtPassword.getText());
+				System.out.println(nombre + " " + txtPassword.getText());
 				
 				boolean existe = bd.iniciarSesion(usuario);
 				
@@ -187,7 +189,8 @@ public class Ventana extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				Usuario usuario = new Usuario();
-				usuario.setNombre(txtUser.getText());
+				nombre = txtUser.getText();
+				usuario.setNombre(nombre);
 				usuario.setContrasenia(txtPassword.getText());
 				boolean existe = bd.registrar(usuario);
 				
@@ -238,5 +241,9 @@ public class Ventana extends JFrame {
 				}
 			}
 		});
+	}
+	
+	public String usuario() {
+		return nombre;
 	}
 }

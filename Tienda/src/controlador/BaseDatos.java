@@ -151,4 +151,12 @@ public class BaseDatos {
 		}
 		return  valor;
 	}
+	
+	public ArrayList<Articulos> vender(){
+		ArrayList<Articulos> arrArticulo = new ArrayList<>();
+		
+		
+		
+		return arrArticulo;
+	}
 }

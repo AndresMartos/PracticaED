@@ -128,12 +128,17 @@ public class Dashboard extends JFrame {
 		HolaUsuario hola = new HolaUsuario();
 		pnlCambia.add(hola);
 		
+		Ventana v = new Ventana();
+		
 		JLabel lblNewLabel = new JLabel("Usuario");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Microsoft PhagsPa", Font.BOLD, 14));
 		lblNewLabel.setForeground(Color.WHITE);
 		lblNewLabel.setBounds(0, 0, 159, 65);
+		lblNewLabel.setText(v.usuario());
 		contentPane.add(lblNewLabel);
+		
+		System.out.println(v.usuario());
 		
 		pnComprar.addMouseListener(new MouseAdapter() {
 			@Override

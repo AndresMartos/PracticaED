@@ -15,7 +15,9 @@ public class HolaUsuario extends JPanel {
 		setBackground(new Color(154,85,204));
 		setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Bienvenido USUARIO");
+		Ventana v = new Ventana();
+		
+		JLabel lblNewLabel = new JLabel("Bienvenido " + v.usuario());
 		lblNewLabel.setFont(new Font("Microsoft PhagsPa", Font.BOLD, 30));
 		lblNewLabel.setBounds(155, 145, 311, 150);
 		add(lblNewLabel);

@@ -5,6 +5,7 @@ import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -20,6 +21,7 @@ public class Vender extends JPanel {
 	private JTextField txtCantidad;
 	private JTextField txtPrecio;
 	private BaseDatos bd = new BaseDatos();
+	private ArrayList<Articulos> arrArticulo = new ArrayList<>();
 
 	/**
 	 * Create the panel.
@@ -75,6 +77,7 @@ public class Vender extends JPanel {
 				if(txtProducto.getText().equals("") || txtCantidad.getText().equals("") || txtPrecio.getText().equals("")) {
 					JOptionPane.showMessageDialog(null, "Introduzca todos los datos!");
 				}else {
+					
 					Articulos articuloActual = new Articulos();
 					String nombre = txtProducto.getText();
 					int cantidad = Integer.parseInt(txtCantidad.getText());
