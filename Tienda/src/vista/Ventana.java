@@ -141,7 +141,9 @@ public class Ventana extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				Usuario usuario = new Usuario();
 				usuario.setNombre(txtUser.getText());
-				usuario.setContrasenia(txtPassword.getPassword());
+				usuario.setContrasenia(txtPassword.getText());
+				
+				System.out.println(txtUser.getText() + " " + txtPassword.getText());
 				
 				boolean existe = bd.iniciarSesion(usuario);
 				
@@ -185,8 +187,8 @@ public class Ventana extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				Usuario usuario = new Usuario();
-				usuario.setNombre(txtUser.getName());
-				usuario.setContrasenia(txtPassword.getPassword());
+				usuario.setNombre(txtUser.getText());
+				usuario.setContrasenia(txtPassword.getText());
 				boolean existe = bd.registrar(usuario);
 				
 				if(existe) { 

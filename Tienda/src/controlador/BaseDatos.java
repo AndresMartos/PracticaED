@@ -50,7 +50,7 @@ public class BaseDatos {
 			Statement consulta = conexion.createStatement(); 
 			ResultSet registro = consulta.executeQuery("select nameuser, password from usuarios");
 			while(registro.next()&&!existe) {
-				if(usuario.getNombre() == registro.getString("nameuser") && usuario.getContrasenia().toString() == registro.getString("password")) {
+				if(usuario.getNombre().equals(registro.getString("nameuser")) && usuario.getContrasenia().toString().equals(registro.getString("password"))) {
 					existe = true;
 				}else {
 					existe = false;
@@ -120,11 +120,11 @@ public class BaseDatos {
 	public boolean iniciarSesion(Usuario usuario) {
 		boolean existe = false;
 		try {
-			Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost/db_articulos", "root", "");
+			Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost/trab_final_tienda","root","");
 			Statement consulta = conexion.createStatement(); 
 			ResultSet registro = consulta.executeQuery("select nameuser, password from usuarios");
 			while(registro.next()&&!existe) {
-				if(usuario.getNombre() == registro.getString("nameuser") && usuario.getContrasenia().toString() == registro.getString("password")) {
+				if(usuario.getNombre().equals(registro.getString("nameuser")) && usuario.getContrasenia().toString().equals(registro.getString("password"))) {
 					existe = true;
 				}else {
 					existe = false;
