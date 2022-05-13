@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.Point;
 
@@ -26,7 +27,8 @@ public class Compra extends JPanel {
 	private JTable jtableTienda;
 	private JTable jtableCesta;
 	private BaseDatos bd = new BaseDatos();
-	private ArrayList<Articulos> arrArticulos = new ArrayList<>();
+	private ArrayList<Articulos> arrArticulosTienda = new ArrayList<>();
+	private ArrayList<Articulos> arrArticulosCesta = new ArrayList<>();
 
 	/**
 	 * Create the panel.
@@ -38,25 +40,37 @@ public class Compra extends JPanel {
 		
 		JLabel lblTienda = new JLabel("Tienda");
 		lblTienda.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblTienda.setBounds(339, 95, 45, 13);
+		lblTienda.setBounds(377, 95, 45, 13);
 		add(lblTienda);
 		
 		JLabel lblCesta = new JLabel("Cesta");
 		lblCesta.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblCesta.setBounds(114, 95, 45, 13);
+		lblCesta.setBounds(129, 95, 45, 13);
 		add(lblCesta);
 		
 		JPanel pnComprar = new JPanel();
 		pnComprar.setLayout(null);
 		pnComprar.setBackground(new Color(47, 8, 85));
-		pnComprar.setBounds(346, 370, 169, 33);
+		pnComprar.setBounds(384, 370, 169, 33);
+		pnComprar.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		add(pnComprar);
 		
 		JLabel lblComprar = new JLabel("Comprar");
 		lblComprar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				DefaultTableModel dtm = (DefaultTableModel) jtableCesta.getModel();
+				dtm.setRowCount(0);
 				
+				arrArticulosCesta.removeAll(arrArticulosCesta);
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				pnComprar.setBackground(new Color(180,30,255));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				pnComprar.setBackground(new Color(47,8,85));
 			}
 		});
 		lblComprar.setBounds(0, 0, 169, 33);
@@ -66,37 +80,107 @@ public class Compra extends JPanel {
 		lblComprar.setFont(new Font("Microsoft PhagsPa", Font.BOLD, 14));
 		
 		JScrollPane scrollpanelTienda = new JScrollPane();
-		scrollpanelTienda.setBounds(210, 118, 305, 209);
+		scrollpanelTienda.setBounds(248, 118, 305, 209);
 		add(scrollpanelTienda);
 		
-		jtableTienda = new JTable();
+		JScrollPane scrollpanelCesta = new JScrollPane();
+		scrollpanelCesta.setBounds(69, 119, 169, 284);
+		add(scrollpanelCesta);
+		jtableCesta = new JTable(){
+			public boolean editCellAt(int row, int column, java.util.EventObject e) {
+	            return false;
+	         }
+		};
+		scrollpanelCesta.setViewportView(jtableCesta);
+		
+		jtableTienda = new JTable(){
+			public boolean editCellAt(int row, int column, java.util.EventObject e) {
+	            return false;
+	         }
+		};
 		jtableTienda.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
+				JTable table =(JTable) e.getSource();
+		        Point point = e.getPoint();
+		        int row = table.rowAtPoint(point);
+		        if (e.getClickCount() == 2 && table.getSelectedColumn() != -1) {
+		        	
+		        	int cols = jtableTienda.getSelectedColumn();
+					int rows = jtableTienda.getSelectedRow();
+
+		        	Articulos articuloActual = new Articulos();
+					
+					String nombreArticulo = jtableTienda.getModel().getValueAt(jtableTienda.getSelectedRow(), 0).toString();
+					int cantidadCompra = (int)jtableTienda.getModel().getValueAt(jtableTienda.getSelectedRow(), 1);
+					int precio = (int)jtableTienda.getModel().getValueAt(jtableTienda.getSelectedRow(), 2);
+					
+					articuloActual.setNombreArticulo(nombreArticulo);
+					articuloActual.setCantidadCompra(cantidadCompra);
+					articuloActual.setPrecio(precio);
+					
+		        	System.out.println(nombreArticulo);
+		        	System.out.println(cantidadCompra);
+		        	System.out.println(precio);
+		        	
+		        	
+		        	arrArticulosCesta.add(articuloActual);
+		        	
+		        	Vector vNombres = new Vector();
+		    		vNombres.add("Nombre");
+		    		vNombres.add("Cantidad");
+		    		vNombres.add("Precio");
+		    		
+		    		jtableCesta.setModel(new DefaultTableModel(vNombres,arrArticulosCesta.size()));
+		    		
+		    		for (int i = 0; i < arrArticulosCesta.size(); i++) {
+		    			jtableCesta.setValueAt(arrArticulosCesta.get(i).getNombreArticulo(), i, 0);
+		    			jtableCesta.setValueAt(arrArticulosCesta.get(i).getCantidadCompra(), i, 1);
+		    			jtableCesta.setValueAt(arrArticulosCesta.get(i).getPrecio(), i, 2);
+		    		}
+		    		
+		    		cargaTablaTienda();
+		        	
+		        }
 			}
 		});
 		scrollpanelTienda.setViewportView(jtableTienda);
-		
-		JScrollPane scrollpanelCesta = new JScrollPane();
-		scrollpanelCesta.setBounds(70, 119, 120, 284);
-		add(scrollpanelCesta);
-		
-		jtableCesta = new JTable();
-		scrollpanelCesta.setViewportView(jtableCesta);
+		cargaTablaTienda();
+	}
+	
+	public void cargaTablaTienda() {
 		
 		Vector vNombres = new Vector();
 		vNombres.add("Nombre");
 		vNombres.add("Cantidad");
 		vNombres.add("Precio");
 		
-		arrArticulos = bd.muestraTabla();
+		arrArticulosTienda = bd.muestraTabla();
 
-		jtableTienda.setModel(new DefaultTableModel(vNombres,arrArticulos.size()));
+		jtableTienda.setModel(new DefaultTableModel(vNombres,arrArticulosTienda.size()));
 		
-		for (int i = 0; i < arrArticulos.size(); i++) {
-			jtableTienda.setValueAt(arrArticulos.get(i).getNombreArticulo(), i, 0);
-			jtableTienda.setValueAt(arrArticulos.get(i).getCantidadCompra(), i, 1);
-			jtableTienda.setValueAt(arrArticulos.get(i).getPrecio(), i, 2);
+		for (int i = 0; i < arrArticulosTienda.size(); i++) {
+			jtableTienda.setValueAt(arrArticulosTienda.get(i).getNombreArticulo(), i, 0);
+			jtableTienda.setValueAt(arrArticulosTienda.get(i).getCantidadCompra(), i, 1);
+			jtableTienda.setValueAt(arrArticulosTienda.get(i).getPrecio(), i, 2);
+		}
+	}
+	
+	public void cargaTablaCesta() {
+		
+		Vector vNombres = new Vector();
+		vNombres.add("Nombre");
+		vNombres.add("Cantidad");
+		vNombres.add("Precio");
+		
+		arrArticulosTienda = bd.muestraTabla();
+
+		jtableTienda.setModel(new DefaultTableModel(vNombres,arrArticulosTienda.size()));
+		
+		for (int i = 0; i < arrArticulosTienda.size(); i++) {
+			jtableTienda.setValueAt(arrArticulosTienda.get(i).getNombreArticulo(), i, 0);
+			jtableTienda.setValueAt(arrArticulosTienda.get(i).getCantidadCompra(), i, 1);
+			jtableTienda.setValueAt(arrArticulosTienda.get(i).getPrecio(), i, 2);
 		}
 	}
 }
