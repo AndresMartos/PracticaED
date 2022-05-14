@@ -20,6 +20,7 @@ public class Vender extends JPanel {
 	private JTextField txtProducto;
 	private JTextField txtCantidad;
 	private JTextField txtPrecio;
+	private boolean existe = false;
 	private BaseDatos bd = new BaseDatos();
 	private ArrayList<Articulos> arrArticulo = new ArrayList<>();
 
@@ -68,6 +69,8 @@ public class Vender extends JPanel {
 		pnVender.setBounds(304, 285, 169, 33);
 		pnVender.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		add(pnVender);
+		arrArticulo = bd.vender();
+		
 		
 		JLabel lblVender = new JLabel("Vender Producto");
 		lblVender.addMouseListener(new MouseAdapter() {
@@ -87,7 +90,18 @@ public class Vender extends JPanel {
 					articuloActual.setCantidadCompra(cantidad);
 					articuloActual.setPrecio(precio);
 					
-					bd.VenderArticulo(articuloActual);
+					for(Articulos art : arrArticulo) {
+						if(articuloActual.getNombreArticulo().toLowerCase().equals(art.getNombreArticulo())) {
+							int opcion = JOptionPane.showConfirmDialog(txtProducto,"Hay un producto con un precio diferente, ¿seguro que quiere cambiarle el precio?","Añadir a la BD", JOptionPane.YES_NO_OPTION);
+							if(opcion ==  JOptionPane.YES_OPTION) {
+								bd.VenderArticulo(articuloActual);
+							}
+							existe = true;
+						}
+					}
+					if(!existe) {
+						bd.VenderArticulo(articuloActual);
+					}
 					
 					System.out.println(nombre);
 					System.out.println(cantidad);

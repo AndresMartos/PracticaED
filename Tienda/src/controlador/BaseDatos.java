@@ -87,6 +87,8 @@ public class BaseDatos {
 				if(articuloActual.getNombreArticulo().toLowerCase().equals(registro.getString("nombre").toLowerCase())) {
 					existe = true;
 					
+					
+					
 					valor = update(articuloActual);
 					
 					if (valor==1) {
@@ -143,7 +145,7 @@ public class BaseDatos {
 			Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost/trab_final_tienda","root","");
 			
 			Statement consulta = conexion.createStatement();
-			valor = consulta.executeUpdate("update productos set cantidad = cantidad+" + articuloActual.getCantidadCompra());
+			valor = consulta.executeUpdate("update productos set cantidad = cantidad+" + articuloActual.getCantidadCompra() + ", precio = " + articuloActual.getPrecio());
 			conexion.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -155,7 +157,23 @@ public class BaseDatos {
 	public ArrayList<Articulos> vender(){
 		ArrayList<Articulos> arrArticulo = new ArrayList<>();
 		
-		
+		try {
+			Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost/madridautos", "root", "");
+			
+			Statement consulta = conexion.createStatement();
+			ResultSet registro = consulta.executeQuery("select * from modelos");
+			Articulos articulo;
+			while(registro.next()) {
+				articulo = new Articulos();
+				articulo.setNombreArticulo(registro.getString("nombre"));
+				articulo.setCantidadCompra(registro.getInt("cantidad"));
+				articulo.setPrecio(registro.getInt("precio"));
+				arrArticulo.add(articulo);
+			}
+			conexion.close();
+		}catch(SQLException e) {
+			System.out.println("No te has conectado a la base de datos");
+		}
 		
 		return arrArticulo;
 	}
