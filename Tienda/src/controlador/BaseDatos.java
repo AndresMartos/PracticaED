@@ -82,7 +82,7 @@ public class BaseDatos {
 			Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost/trab_final_tienda","root","");
 			
 			Statement consulta = conexion.createStatement();
-			ResultSet registro = consulta.executeQuery("select nombre from productos");
+			ResultSet registro = consulta.executeQuery("select * from productos");
 			while(registro.next()&&!existe) {
 				if(articuloActual.getNombreArticulo().toLowerCase().equals(registro.getString("nombre").toLowerCase())) {
 					existe = true;
@@ -145,7 +145,8 @@ public class BaseDatos {
 			Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost/trab_final_tienda","root","");
 			
 			Statement consulta = conexion.createStatement();
-			valor = consulta.executeUpdate("update productos set cantidad = cantidad+" + articuloActual.getCantidadCompra() + ", precio = " + articuloActual.getPrecio());
+			valor = consulta.executeUpdate("update productos set cantidad = cantidad+" + articuloActual.getCantidadCompra());
+//			valor = consulta.executeUpdate("update productos set cantidad = cantidad+" + articuloActual.getCantidadCompra() + ", precio = " + articuloActual.getPrecio());
 			conexion.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

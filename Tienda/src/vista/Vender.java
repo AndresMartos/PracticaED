@@ -91,7 +91,8 @@ public class Vender extends JPanel {
 					articuloActual.setPrecio(precio);
 					
 					for(Articulos art : arrArticulo) {
-						if(articuloActual.getNombreArticulo().toLowerCase().equals(art.getNombreArticulo())) {
+						System.out.println(articuloActual.getNombreArticulo());
+						if(articuloActual.getNombreArticulo().toLowerCase().equals(art.getNombreArticulo().toLowerCase())) {
 							int opcion = JOptionPane.showConfirmDialog(txtProducto,"Hay un producto con un precio diferente, ¿seguro que quiere cambiarle el precio?","Añadir a la BD", JOptionPane.YES_NO_OPTION);
 							if(opcion ==  JOptionPane.YES_OPTION) {
 								bd.VenderArticulo(articuloActual);

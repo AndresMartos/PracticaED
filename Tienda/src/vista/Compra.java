@@ -28,7 +28,7 @@ public class Compra extends JPanel {
 	private JTable jtableCesta;
 	private BaseDatos bd = new BaseDatos();
 	private ArrayList<Articulos> arrArticulosTienda = new ArrayList<>();
-	private ArrayList<Articulos> arrArticulosCesta = new ArrayList<>();
+	private Articulos articuloActual = new Articulos();
 
 	/**
 	 * Create the panel.
@@ -61,8 +61,6 @@ public class Compra extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				DefaultTableModel dtm = (DefaultTableModel) jtableCesta.getModel();
 				dtm.setRowCount(0);
-				
-				arrArticulosCesta.removeAll(arrArticulosCesta);
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -91,6 +89,33 @@ public class Compra extends JPanel {
 	            return false;
 	         }
 		};
+		jtableCesta.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				JTable table =(JTable) e.getSource();
+		        Point point = e.getPoint();
+		        int row = table.rowAtPoint(point);
+		        if (e.getClickCount() == 2 && table.getSelectedColumn() != -1) {
+
+//					String nombreArticulo = jtableCesta.getModel().getValueAt(jtableCesta.getSelectedRow(), 0).toString();
+//					int cantidadCesta = (int)jtableCesta.getModel().getValueAt(jtableCesta.getSelectedRow(), 1);
+//					int precio = (int)jtableCesta.getModel().getValueAt(jtableCesta.getSelectedRow(), 2);
+					
+					articuloActual.getNombreArticulo();
+					articuloActual.getCantidadCompra();
+					articuloActual.getPrecio();
+					
+		        	System.out.println(articuloActual.getNombreArticulo());
+		        	System.out.println(articuloActual.getCantidadCompra());
+		        	System.out.println(articuloActual.getPrecio());
+		        	
+		        	DefaultTableModel modelo = (DefaultTableModel) jtableCesta.getModel();
+		        	modelo.removeRow(jtableCesta.getSelectedRow());
+		        	
+		        }
+			}
+			
+		});
 		scrollpanelCesta.setViewportView(jtableCesta);
 		
 		jtableTienda = new JTable(){
@@ -105,9 +130,6 @@ public class Compra extends JPanel {
 		        Point point = e.getPoint();
 		        int row = table.rowAtPoint(point);
 		        if (e.getClickCount() == 2 && table.getSelectedColumn() != -1) {
-		        	
-		        	int cols = jtableTienda.getSelectedColumn();
-					int rows = jtableTienda.getSelectedRow();
 
 		        	Articulos articuloActual = new Articulos();
 					
@@ -124,20 +146,15 @@ public class Compra extends JPanel {
 		        	System.out.println(precio);
 		        	
 		        	
-		        	arrArticulosCesta.add(articuloActual);
-		        	
 		        	Vector vNombres = new Vector();
 		    		vNombres.add("Nombre");
 		    		vNombres.add("Cantidad");
 		    		vNombres.add("Precio");
 		    		
-		    		jtableCesta.setModel(new DefaultTableModel(vNombres,arrArticulosCesta.size()));
+		    		jtableCesta.setModel(new DefaultTableModel(vNombres,arrArticulosTienda.size()));
 		    		
-		    		for (int i = 0; i < arrArticulosCesta.size(); i++) {
-		    			jtableCesta.setValueAt(arrArticulosCesta.get(i).getNombreArticulo(), i, 0);
-		    			jtableCesta.setValueAt(arrArticulosCesta.get(i).getCantidadCompra(), i, 1);
-		    			jtableCesta.setValueAt(arrArticulosCesta.get(i).getPrecio(), i, 2);
-		    		}
+		        	DefaultTableModel model = (DefaultTableModel) jtableCesta.getModel();
+		        	model.addRow(new Object[]{nombreArticulo, cantidadCompra, precio});
 		    		
 		    		cargaTablaTienda();
 		        	
@@ -149,24 +166,6 @@ public class Compra extends JPanel {
 	}
 	
 	public void cargaTablaTienda() {
-		
-		Vector vNombres = new Vector();
-		vNombres.add("Nombre");
-		vNombres.add("Cantidad");
-		vNombres.add("Precio");
-		
-		arrArticulosTienda = bd.muestraTabla();
-
-		jtableTienda.setModel(new DefaultTableModel(vNombres,arrArticulosTienda.size()));
-		
-		for (int i = 0; i < arrArticulosTienda.size(); i++) {
-			jtableTienda.setValueAt(arrArticulosTienda.get(i).getNombreArticulo(), i, 0);
-			jtableTienda.setValueAt(arrArticulosTienda.get(i).getCantidadCompra(), i, 1);
-			jtableTienda.setValueAt(arrArticulosTienda.get(i).getPrecio(), i, 2);
-		}
-	}
-	
-	public void cargaTablaCesta() {
 		
 		Vector vNombres = new Vector();
 		vNombres.add("Nombre");
