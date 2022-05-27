@@ -1,0 +1,81 @@
+Nombre: IniciarSesión
+ID: IC
+Descripción:
+	El usuario se debe identificar antes de realizar cualquier acción en la aplicación, para ello
+	debe iniciar sesión o registrarse en el frame que le sale por pantalla. 
+	Si el usuario inicia sesión deberá introducir su nombre de usuario y su contraseña, el sistema
+	valida los datos, si son correctos permite el acceso, en caso contrario no permite el acceso.
+	Si el usuario se registra deberá introducir su nombre de usuario y su contraseña, si no coinciden con
+	alguno de la base de datos te permite el acceso, en caso contrario no permite el acceso.
+Actores: Usuario
+Precondiciones: Ninguna.
+Curso normal del caso de uso:
+	1.El usuario debe iniciar sesión o registrarse.
+	2.Si inicia sesión:
+		2.1.El sistema solicita el nombre de usuario y contraseña.
+		2.2.El usuario introduce el nombre de usuario y la contraseña.
+		2.3.El sistema valida los datos introducidos.
+		2.4.Si los datos son correctos:
+			2.4.1.El sistema te da acceso a vender y comprar.
+		2.5.Si los datos no son correctos:
+			2.5.1.El sistema no te da acceso a vender y comprar.
+	3.Si se registra:
+		3.1.El sistema solicita el nombre de usuario y contraseña.
+		3.2.El usuario introduce el nombre de usuario y la contraseña.
+		3.3.El sistema comprueba que no haya un usuario con el mismo nombre de usuario y contraseña.
+		3.4.Si no existe uno igual:
+			3.4.1.Crea la cuenta y te deja acceder a vender y comprar.
+		3.5.Si existe uno igual:
+			3.5.1.El sistema te advierte de que ya hay un usuario igual.
+Postcondiciones: El usuario accede a vender y comprar.
+Alternativas: Ninguna.
+
+===================================================================================================================
+
+Nombre: Comprar
+ID: C
+Descripción:
+	Al usuario se le presenta un panel con dos tablas en una están los artículos de la tienda y en la otra
+	los artículos en tu cesta.
+	Si das doble click en la tabla de artículos se pasará el artículo seleccionado a la cesta.
+	Si das doble click en la tabla de cesta se pasará el artículo seleccionado a la tienda.
+	Una vez realizadas todas las acciones dar al botón comprar para finalizar la compra.
+Actores: Usuario
+Precondiciones: Haber iniciado sesión o registrarse.
+Curso normal del caso de uso:
+	1.El usuario debe dar doble click sobre un artículo de la tabla de tienda.
+	2.El artículo se le resta la cantidad correspondiente en tabla de tienda y se le añade a la cesta.
+	3.Si el usuario da doble click sobre un artículo en la tabla de tienda:
+		3.1.El artículo se le resta la cantidad correspondiente en tabla de tienda y se le añade a la
+		    cesta.
+	4.Si el usuario da doble click sobre un artículo en la tabla de cesta:
+		4.1.El artículo se le resta la cantidad correspondiente en tabla de cesta y se le añade a la
+		    tienda.
+	5.El usuario debe pulsar el botón comprar para finalizar la compra.
+Postcondiciones: El usuario habrá comprado los artículos correspondientes y se habrán borrado de la base de datos 
+		 de tienda.
+Alternativas: Ninguna.
+
+===================================================================================================================
+
+Nombre: Vender
+ID: V
+Descripción:
+	Al usuario se le presenta un panel con una caja de texto y dos spinners.
+	Si introduce correctamente los datos del producto podrá venderlo, en caso contrario saltará un mensaje
+	de porque no le deja vender el producto.
+Actores: Usuario
+Precondiciones: Haber iniciado sesión o registrarse.
+Curso normal de casos de uso:
+	1.El usuario debe introducir los datos en las cajas correspondientes.
+	2.Dar al boton de vender para finalizar la venta.
+	3.Si el nombre del producto está vacío:
+		3.1.Saltará un mensaje diciendo que lo completes.(Vover al paso 1)
+	4.Si la cantidad es menor o igual a 0:
+		4.1.Saltará un mensaje diciendo que la cantidad introducida no es correcta.(Volver al paso 1)
+	5.Si el precio es menor o igual a 0:
+		5.1.Saltará un mensaje diciendo que el precio introducido no es correcto.(Volver al paso 1)
+	6.Si no hay ningún error se habrá añadido el objeto a la base de datos.
+Postcondiciones: El usuario habrá vendido el artículo correspondiente y se habrán añadido a la base de datos de
+		 tienda.
+Alternativas: Ninguna.
