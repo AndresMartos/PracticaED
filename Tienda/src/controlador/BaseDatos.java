@@ -16,8 +16,18 @@ import modelo.Articulos;
 import modelo.Usuario;
 import vista.Vender;
 
+/**
+ * 
+ * @author Diego, Carlos y Andrés
+ *
+ */
 public class BaseDatos {
 	
+	/**
+	 * Se realiza para cargar el array de los articulos de la base de dates 
+	 * y usarlo para mostrar los articulos en la tabla.
+	 * @return arrArticulos
+	 */
 	public ArrayList<Articulos> muestraTabla() {
 		ArrayList<Articulos> arrArticulos = new ArrayList<>();
 		
@@ -43,6 +53,12 @@ public class BaseDatos {
 		return arrArticulos;
 	}
 	
+	/**
+	 * El usuario al pulsar registrarse se pasará al usuario por parámetro, se buscará si existe en la base de datos, 
+	 * si no, se inserta en la tabla de usuarios el nuevo usuario, retorna el estado, si existe el usuario o no.
+	 * @param usuario
+	 * @return existe
+	 */
 	public boolean registrar(Usuario usuario) {
 		boolean existe = false;
 		try {
@@ -69,7 +85,12 @@ public class BaseDatos {
 		return existe;
 	}
 	
-
+	/**
+	 * Se realiza una consulta a los artículos de la base de datos, si el objeto articulo pasado por parámetro existe,
+	 * se realiza una modificación del existente, enviándolo al método "update", si no existe, se inserta. Se devuelve si existe o no.
+	 * @param articuloActual
+	 * @return existe
+	 */
 	public boolean VenderArticulo(Articulos articuloActual) {
 		// TODO Auto-generated method stub
 		
@@ -119,6 +140,13 @@ public class BaseDatos {
 		
 	}
 	
+	/**
+	 * Al dar al botón de iniciar sesión, se pasa por parámetro el objeto usuario, al que se compara con la base de datos,
+	 * si el usuario no existe, saltará un aviso de que el usuario no existe, 
+	 * si existe se enviará al usuario a la ventana de Comprar y Vender.
+	 * @param usuario
+	 * @return existe
+	 */
 	public boolean iniciarSesion(Usuario usuario) {
 		boolean existe = false;
 		try {
@@ -139,6 +167,12 @@ public class BaseDatos {
 		return existe;
 	}
 	
+	/**
+	 * Se pasará por parámetro el objeto articuloActual del método de "vender" 
+	 * y se actualizará en la base de datos el producto introducido.
+	 * @param articuloActual
+	 * @return valor
+	 */
 	public int update(Articulos articuloActual) {
 		int valor = 1;
 		try {
@@ -153,29 +187,5 @@ public class BaseDatos {
 			e.printStackTrace();
 		}
 		return  valor;
-	}
-	
-	public ArrayList<Articulos> vender(){
-		ArrayList<Articulos> arrArticulo = new ArrayList<>();
-		
-		try {
-			Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost/madridautos", "root", "");
-			
-			Statement consulta = conexion.createStatement();
-			ResultSet registro = consulta.executeQuery("select * from modelos");
-			Articulos articulo;
-			while(registro.next()) {
-				articulo = new Articulos();
-				articulo.setNombreArticulo(registro.getString("nombre"));
-				articulo.setCantidadCompra(registro.getInt("cantidad"));
-				articulo.setPrecio(registro.getInt("precio"));
-				arrArticulo.add(articulo);
-			}
-			conexion.close();
-		}catch(SQLException e) {
-			System.out.println("No te has conectado a la base de datos");
-		}
-		
-		return arrArticulo;
 	}
 }

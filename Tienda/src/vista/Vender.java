@@ -15,17 +15,16 @@ import javax.swing.SwingConstants;
 
 import controlador.BaseDatos;
 import modelo.Articulos;
+import javax.swing.JSpinner;
 
 public class Vender extends JPanel {
 	private JTextField txtProducto;
-	private JTextField txtCantidad;
-	private JTextField txtPrecio;
 	private boolean existe = false;
 	private BaseDatos bd = new BaseDatos();
 	private ArrayList<Articulos> arrArticulo = new ArrayList<>();
 
 	/**
-	 * Create the panel.
+	 * Crea el Panel.
 	 */
 	public Vender() {
 		setLayout(null);
@@ -52,16 +51,6 @@ public class Vender extends JPanel {
 		add(txtProducto);
 		txtProducto.setColumns(10);
 		
-		txtCantidad = new JTextField();
-		txtCantidad.setBounds(192, 170, 281, 20);
-		add(txtCantidad);
-		txtCantidad.setColumns(10);
-		
-		txtPrecio = new JTextField();
-		txtPrecio.setBounds(192, 220, 281, 20);
-		add(txtPrecio);
-		txtPrecio.setColumns(10);
-		
 		JPanel pnVender = new JPanel();
 		
 		pnVender.setLayout(null);
@@ -69,7 +58,17 @@ public class Vender extends JPanel {
 		pnVender.setBounds(304, 285, 169, 33);
 		pnVender.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		add(pnVender);
-		arrArticulo = bd.vender();
+		
+		JSpinner spnPrecio = new JSpinner();
+		spnPrecio.setBounds(192, 220, 281, 20);
+		spnPrecio.setEditor(new JSpinner.DefaultEditor(spnPrecio));
+		add(spnPrecio);
+		
+		JSpinner spnCantidad = new JSpinner();
+		spnCantidad.setBounds(192, 170, 281, 20);
+		spnCantidad.setEditor(new JSpinner.DefaultEditor(spnCantidad));
+		add(spnCantidad);
+		
 		
 		
 		JLabel lblVender = new JLabel("Vender Producto");
@@ -77,14 +76,19 @@ public class Vender extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				if(txtProducto.getText().equals("") || txtCantidad.getText().equals("") || txtPrecio.getText().equals("")) {
-					JOptionPane.showMessageDialog(null, "Introduzca todos los datos!");
+				if(txtProducto.getText().equals("")) {
+					JOptionPane.showMessageDialog(null, "Introduzca un producto!");
+				}else if((int)spnCantidad.getValue()<=0) {
+					JOptionPane.showMessageDialog(null, "Introduzca una cantidad a partir de 1");
+				}else if((int)spnPrecio.getValue()<=0) {
+					JOptionPane.showMessageDialog(null, "Introduzca un precio a partir de 1");
+					
 				}else {
 					
 					Articulos articuloActual = new Articulos();
 					String nombre = txtProducto.getText();
-					int cantidad = Integer.parseInt(txtCantidad.getText());
-					int precio = Integer.parseInt(txtPrecio.getText());
+					int cantidad = (int)spnCantidad.getValue();
+					int precio = (int)spnPrecio.getValue();
 					
 					articuloActual.setNombreArticulo(nombre);
 					articuloActual.setCantidadCompra(cantidad);
@@ -110,8 +114,8 @@ public class Vender extends JPanel {
 					
 					
 					txtProducto.setText("");
-					txtCantidad.setText("");
-					txtPrecio.setText("");
+					spnPrecio.setValue(0);
+					spnCantidad.setValue(0);
 				}
 				
 				

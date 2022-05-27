@@ -1,5 +1,6 @@
 package vista;
 
+
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -23,6 +24,11 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Vector;
 
+/**
+ * 
+ * @author Diego, Carlos y Andrés
+ *
+ */
 public class Compra extends JPanel {
 	private JTable jtableTienda;
 	private JTable jtableCesta;
@@ -31,7 +37,7 @@ public class Compra extends JPanel {
 	private Articulos articuloActual = new Articulos();
 
 	/**
-	 * Create the panel.
+	 * Crear el panel Comprar
 	 */
 	public Compra() {
 		setLayout(null);

@@ -21,15 +21,21 @@ import java.awt.event.MouseEvent;
 import java.awt.CardLayout;
 import java.awt.Toolkit;
 
+
+/**
+ * 
+ * @author Diego, Carlos y Andrés
+ *
+ */
 public class Dashboard extends JFrame {
 
 	private JPanel contentPane;
 	private JPanel pnlCambia;
 
 	/**
-	 * Launch the application.
+	 * Lanza el JFrame DashBoard.
 	 */
-	public static void main(String[] args) {
+	public void cargaDashboard(JFrame frame) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -43,7 +49,7 @@ public class Dashboard extends JFrame {
 	}
 
 	/**
-	 * Create the frame.
+	 * Crea el Frame.
 	 */
 	public Dashboard() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Dashboard.class.getResource("/Images/bonsai.png")));	
@@ -176,6 +182,10 @@ public class Dashboard extends JFrame {
 		
 	}
 	
+	/**
+	 * Método utilizado para el cambio de JPanels al cual le pasamos el jpanel por parámetro.
+	 * @param p
+	 */
 	public void cambiar(JPanel p) {
 		pnlCambia.removeAll();
 		pnlCambia.add(p);

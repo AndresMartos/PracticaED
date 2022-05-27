@@ -10,10 +10,16 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 
+
+/**
+ * 
+ * @author Diego, Carlos y Andrés
+ *
+ */
 public class HolaUsuario extends JPanel {
 
 	/**
-	 * Create the panel.
+	 * Crea el Panel.
 	 */
 	public HolaUsuario() {
 		setBackground(new Color(154,85,204));

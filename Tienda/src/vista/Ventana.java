@@ -22,6 +22,12 @@ import javax.swing.UIManager;
 import controlador.BaseDatos;
 import modelo.Usuario;
 
+
+/**
+ * 
+ * @author Diego, Carlos y Andrés
+ *
+ */
 public class Ventana extends JFrame {
 
 	private JPanel contentPane;
@@ -30,7 +36,7 @@ public class Ventana extends JFrame {
 	private BaseDatos bd = new BaseDatos();
 	private static String nombre;
 	/**
-	 * Launch the application.
+	 * Lanza el JFrame de la ventana
 	 */
 	public void cargarVentana(JFrame frame) {
 		EventQueue.invokeLater(new Runnable() {
@@ -46,7 +52,7 @@ public class Ventana extends JFrame {
 	}
 
 	/**
-	 * Create the frame.
+	 * Crea el JFrame
 	 */
 	public Ventana() {
 		setTitle("Vida++");
@@ -255,6 +261,10 @@ public class Ventana extends JFrame {
 		});
 	}
 	
+	/**
+	 * Utilizado para poder visualizar el nombre del usuario en el DashBoard
+	 * @return nombre
+	 */
 	public String usuario() {
 		return nombre;
 	}
