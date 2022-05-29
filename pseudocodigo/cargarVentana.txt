@@ -1,0 +1,9 @@
+INICIO
+	probar
+		NuevaVentana frame;
+		frame EstablecerVisibilidad = Visible;
+	FIN probar;
+	Capturar
+		mostrar SeguimientoDePila;
+	FIN capturar;
+FINAL

@@ -1,0 +1,16 @@
+INICIO
+	Nuevo Vector vNombre;
+	vNombre añadir "Nombre";
+	vNombre añadir "Cantidad";
+	vNombre añadir Precio;
+
+	arrayArticulos = BasedeDatos(muestraTabla);
+
+	jtabla establecerModelo(vNombres, arrayArticulos);
+
+	desde i <-- desde 0 hasta arrayArticulos(tamaño) con paso 1 Hacer
+		jTabla establecerValor(arrayArticulos recoger(i) recogerNombre, posicion i, 0);
+		jTabla establecerValor(arrayArticulos recoger(i) recogerCantidad, posicion i, 1);
+		jTabla establecerValor(arrayArticulos recoger(i) recogerPrecio, posicion i, 2);
+	FIN PARA
+FINAL
