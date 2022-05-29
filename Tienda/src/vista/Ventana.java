@@ -231,6 +231,38 @@ public class Ventana extends JFrame {
 		lblRegistrar.setBounds(0, 0, 103, 33);
 		pnlRegistrar.add(lblRegistrar);
 		
+		JPanel pnlSalir = new JPanel();
+		pnlSalir.setLayout(null);
+		pnlSalir.setBackground(new Color(47, 8, 85));
+		pnlSalir.setBounds(411, 400, 103, 33);
+		pnlSalir.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		contentPane.add(pnlSalir);
+		
+		JLabel lblSalir = new JLabel("Salir");
+		lblSalir.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int valor = JOptionPane.showConfirmDialog(null, "¿Desea salir del programa?");
+								
+	        	if (JOptionPane.OK_OPTION == valor) {
+	        		System.exit(0);
+	        	}
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				pnlSalir.setBackground(new Color(180,30,255));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				pnlSalir.setBackground(new Color(47,8,85));
+			}
+		});
+		lblSalir.setHorizontalAlignment(SwingConstants.CENTER);
+		lblSalir.setForeground(Color.WHITE);
+		lblSalir.setFont(new Font("Microsoft PhagsPa", Font.BOLD, 14));
+		lblSalir.setBounds(0, 0, 103, 33);
+		pnlSalir.add(lblSalir);
+		
 		txtUser.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
