@@ -4,14 +4,14 @@ import vista.Dashboard;
 import vista.Ventana;
 
 /**
- * 
+ * Ejecuta la aplicación.
  * @author Diego, Carlos y Andrés
  *
  */
 public class Ejecutador {
 
 	/**
-	 * Clase principal del programa, donde se ejecutan el resto de acciones.
+	 * Método main desde el cual se ejecutan las ventanas.
 	 * @param args
 	 */
 	public static void main(String[] args) {

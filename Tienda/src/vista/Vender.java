@@ -16,7 +16,11 @@ import javax.swing.SwingConstants;
 import controlador.BaseDatos;
 import modelo.Articulos;
 import javax.swing.JSpinner;
-
+/**
+ * Panel desde donde se venden los artículos.
+ * @author Andrés, Diego, Carlos
+ *
+ */
 public class Vender extends JPanel {
 	private JTextField txtProducto;
 	private boolean existe = false;

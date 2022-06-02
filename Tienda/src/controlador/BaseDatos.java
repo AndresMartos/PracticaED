@@ -17,7 +17,7 @@ import modelo.Usuario;
 import vista.Vender;
 
 /**
- * 
+ * Métodos para interactuar con la base de datos.
  * @author Diego, Carlos y Andrés
  *
  */
@@ -188,4 +188,27 @@ public class BaseDatos {
 		}
 		return  valor;
 	}
+	/**
+	 * Método que realiza la compra.
+	 * @param arrArticulos
+	 * @return
+	 */
+	public int comprar(ArrayList<Articulos> arrArticulos) {
+		int valor = 1;
+		try {
+			Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost/trab_final_tienda","root","");
+			
+			Statement consulta = conexion.createStatement();
+			for(Articulos a : arrArticulos) {
+				valor = consulta.executeUpdate("update productos set cantidad = cantidad - " + a.getCantidadCompra() + " where nombre = '" + a.getNombreArticulo() + "'");
+			}
+//			valor = consulta.executeUpdate("update productos set cantidad = cantidad+" + articuloActual.getCantidadCompra() + ", precio = " + articuloActual.getPrecio());
+			conexion.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return  valor;
+	}
+	
 }

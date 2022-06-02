@@ -12,7 +12,7 @@ import javax.swing.SwingConstants;
 
 
 /**
- * 
+ * Panel que da la bienvenida al usuario.
  * @author Diego, Carlos y Andrés
  *
  */

@@ -24,7 +24,7 @@ import modelo.Usuario;
 
 
 /**
- * 
+ * Ventana de inicio de sesión.
  * @author Diego, Carlos y Andrés
  *
  */

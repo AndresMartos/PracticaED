@@ -23,7 +23,7 @@ import java.awt.Toolkit;
 
 
 /**
- * 
+ * Frame de dentro de la tienda.
  * @author Diego, Carlos y Andrés
  *
  */
